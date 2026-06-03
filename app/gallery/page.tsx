@@ -19,8 +19,8 @@ export default function GalleryPage() {
             Project Gallery
           </h1>
           <p className="font-sans text-base text-text-muted-inv max-w-[520px] leading-relaxed">
-            A selection of completed builds, fit-outs, and renovations across
-            Nairobi. Real project photos coming soon — placeholders shown below.
+            A selection of architectural designs and completed builds across
+            Nairobi. Project photos added as work progresses.
           </p>
         </div>
       </section>

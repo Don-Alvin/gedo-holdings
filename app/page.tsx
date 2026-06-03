@@ -1,7 +1,7 @@
 import Hero from "@/components/home/Hero";
 import TrustStrip from "@/components/home/TrustStrip";
 import Services from "@/components/home/Services";
-import HomeCTA from "@/components/home/HomeCTA";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
       <Hero />
       <TrustStrip />
       <Services />
-      <HomeCTA />
+      <Testimonials />
     </>
   );
 }

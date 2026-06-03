@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import Eyebrow from "@/components/Eyebrow";
 
 export default function HomeCTA() {
@@ -37,13 +37,6 @@ export default function HomeCTA() {
           >
             Get a Free Quote
           </Link>
-          <a
-            href="tel:+254722901959"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-md border border-ink-700 text-text-inverse font-medium hover:border-royal-600 hover:text-royal-500 transition-colors"
-          >
-            <Phone size={16} />
-            0722 901 959
-          </a>
           <a
             href="https://wa.me/254722901959"
             target="_blank"

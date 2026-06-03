@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, MessageCircle, Menu, X } from "lucide-react";
+import { MessageCircle, Menu, X, Phone } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -48,7 +48,8 @@ export default function Header() {
             alt="Gedo Holdings"
             width={140}
             height={40}
-            className="h-9 w-auto object-contain"
+            className="h-9 object-contain"
+            style={{ width: "auto" }}
             priority
           />
         </Link>
@@ -70,20 +71,17 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
-          <a
-            href="tel:+254722901959"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-royal-600 text-white text-sm font-medium hover:bg-royal-700 hover:-translate-y-px transition-all shadow-[0_6px_20px_rgba(30,71,230,0.30)]"
-          >
-            <Phone size={14} />
-            Call
-          </a>
+        {/* Desktop CTA — phone reference + WhatsApp */}
+        <div className="hidden md:flex items-center gap-5 flex-shrink-0">
+          <span className="flex items-center gap-1.5 text-text-muted-inv text-sm select-none">
+            <Phone size={13} className="text-royal-500 flex-shrink-0" strokeWidth={1.75} />
+            Call us on: 0722 901 959
+          </span>
           <a
             href="https://wa.me/254722901959"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-ink-700 text-text-inverse text-sm font-medium hover:border-royal-600 hover:text-royal-500 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-royal-600 text-white text-sm font-medium hover:bg-royal-700 hover:-translate-y-px transition-all shadow-[0_6px_20px_rgba(30,71,230,0.30)]"
           >
             <MessageCircle size={14} />
             WhatsApp
@@ -117,22 +115,19 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <div className="flex flex-col gap-3 mt-8">
-            <a
-              href="tel:+254722901959"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-md bg-royal-600 text-white font-medium shadow-[0_6px_20px_rgba(30,71,230,0.30)]"
-            >
-              <Phone size={18} />
-              Call Now
-            </a>
+          <div className="mt-8 flex flex-col gap-4">
+            <span className="flex items-center gap-2 text-text-muted-inv text-sm select-none">
+              <Phone size={14} className="text-royal-500 flex-shrink-0" strokeWidth={1.75} />
+              Call us on: 0722 901 959
+            </span>
             <a
               href="https://wa.me/254722901959"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-md border border-ink-700 text-text-inverse font-medium"
+              className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-md bg-royal-600 text-white font-medium shadow-[0_6px_20px_rgba(30,71,230,0.30)]"
             >
               <MessageCircle size={18} />
-              WhatsApp
+              Chat on WhatsApp
             </a>
           </div>
         </div>

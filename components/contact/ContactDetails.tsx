@@ -33,22 +33,18 @@ export default function ContactDetails() {
         </h2>
         <p className="font-sans text-base text-text-secondary leading-relaxed max-w-[420px]">
           Whether you&apos;re planning a new home, an office fit-out, or a
-          renovation, our team is ready to help. Reach us by phone, WhatsApp, or
-          email — we respond promptly.
+          renovation, our team is ready to help. Reach us by WhatsApp or email
+          — we respond promptly.
         </p>
       </div>
 
       <div className="flex flex-col gap-5">
+        {/* Phone — plain text for reference per brief, no tel: link */}
         <DetailRow
           icon={<Phone size={18} className="text-royal-600" />}
           label="Phone"
         >
-          <a
-            href="tel:+254722901959"
-            className="font-sans text-ink-900 font-medium hover:text-royal-600 transition-colors"
-          >
-            0722 901 959
-          </a>
+          <p className="font-sans text-ink-900 font-medium">0722 901 959</p>
         </DetailRow>
 
         <DetailRow

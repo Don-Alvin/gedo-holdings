@@ -61,6 +61,22 @@
   }
 }
 
+@keyframes scrollUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+/* shadcn semantic vars — bento-gallery and any shadcn components inherit these */
+:root {
+  --background: var(--concrete-50);
+  --foreground: var(--ink-900);
+  --card: var(--paper);
+  --card-foreground: var(--ink-900);
+  --border: var(--concrete-200);
+  --ring: var(--royal-600);
+  --muted-foreground: var(--text-secondary);
+}
+
 body {
   background: var(--concrete-50);
   color: var(--ink-900);

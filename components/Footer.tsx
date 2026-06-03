@@ -34,7 +34,8 @@ export default function Footer() {
               alt="Gedo Holdings"
               width={140}
               height={40}
-              className="h-9 w-auto object-contain"
+              className="h-9 object-contain"
+              style={{ width: "auto" }}
             />
             <p className="text-text-muted-inv text-sm leading-relaxed">
               Building Dreams. Enhancing Lives.
@@ -44,7 +45,8 @@ export default function Footer() {
               alt="NCA Registered"
               width={80}
               height={80}
-              className="h-14 w-auto object-contain"
+              className="h-14 object-contain"
+              style={{ width: "auto" }}
             />
           </div>
 
@@ -77,14 +79,10 @@ export default function Footer() {
               Contact
             </p>
             <ul className="flex flex-col gap-3">
-              <li>
-                <a
-                  href="tel:+254722901959"
-                  className="flex items-center gap-2 text-text-muted-inv text-sm hover:text-text-inverse transition-colors"
-                >
-                  <Phone size={13} className="text-royal-600 flex-shrink-0" />
-                  0722 901 959
-                </a>
+              {/* Phone — plain text per brief, no tel: link */}
+              <li className="flex items-center gap-2 text-text-muted-inv text-sm">
+                <Phone size={13} className="text-royal-600 flex-shrink-0" />
+                0722 901 959
               </li>
               <li>
                 <a
@@ -93,10 +91,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-text-muted-inv text-sm hover:text-text-inverse transition-colors"
                 >
-                  <MessageCircle
-                    size={13}
-                    className="text-royal-600 flex-shrink-0"
-                  />
+                  <MessageCircle size={13} className="text-royal-600 flex-shrink-0" />
                   WhatsApp
                 </a>
               </li>
@@ -110,10 +105,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-2 text-text-muted-inv text-sm">
-                <MapPin
-                  size={13}
-                  className="text-royal-600 flex-shrink-0 mt-0.5"
-                />
+                <MapPin size={13} className="text-royal-600 flex-shrink-0 mt-0.5" />
                 Grey Park Annex, Eastern Bypass, Nairobi
               </li>
               <li className="text-text-muted-inv text-sm pl-5">

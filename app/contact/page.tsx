@@ -21,7 +21,7 @@ export default function ContactPage() {
           </h1>
           <p className="font-sans text-base text-text-muted-inv max-w-[480px] leading-relaxed">
             Tell us about your project and we&apos;ll get back to you within one
-            business day. Or call and WhatsApp us directly.
+            business day. Or reach us directly on WhatsApp.
           </p>
         </div>
       </section>

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Montserrat, Mulish, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 
-const displayFont = Archivo({
+const displayFont = Montserrat({
   subsets: ["latin"],
   weight: ["600", "700", "800"],
   variable: "--font-display",
 });
 
-const sansFont = IBM_Plex_Sans({
+const sansFont = Mulish({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-sans",
