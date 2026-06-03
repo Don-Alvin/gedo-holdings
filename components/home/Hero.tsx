@@ -24,14 +24,10 @@ export default function Hero() {
     visible: { transition: { staggerChildren: 0.08 } },
   };
 
-  const collageReveal = {
-    hidden: { opacity: prefersReduced ? 1 : 0, scale: prefersReduced ? 1 : 0.97 },
-    visible: { opacity: 1, scale: 1 },
-  };
 
   return (
     <section className="relative bg-ink-950 overflow-hidden">
-      {/* Blueprint grid texture */}
+      {/* Blueprint grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -44,12 +40,12 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Soft royal radial glow — sits behind the right collage */}
+      {/* Royal radial glow — right side, behind image grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 70% at 80% 50%, rgba(30,71,230,0.13) 0%, transparent 65%)",
+            "radial-gradient(ellipse 55% 65% at 82% 52%, rgba(30,71,230,0.14) 0%, transparent 65%)",
         }}
         aria-hidden="true"
       />
@@ -72,7 +68,7 @@ export default function Hero() {
             >
               <span className="block w-8 h-px bg-royal-600 flex-shrink-0" aria-hidden="true" />
               <span className="font-mono text-[0.7rem] text-royal-500 uppercase tracking-[0.12em]">
-                Est. 2018 · Nairobi
+                Est. 2018 · Across Kenya
               </span>
             </motion.div>
 
@@ -92,9 +88,8 @@ export default function Hero() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="font-sans text-lg text-text-muted-inv leading-relaxed mb-10 max-w-[520px]"
             >
-              Architectural design, home construction, office partitioning, and
-              renovation across Nairobi — delivered by an NCA-registered team
-              with 8 years on the ground.
+              Design, construction, and finishing across Kenya — delivered by an
+              NCA-registered team with 8 years on the ground.
             </motion.p>
 
             {/* CTAs */}
@@ -144,15 +139,30 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right: image collage ── */}
-          <motion.div
-            variants={collageReveal}
-            initial="hidden"
-            animate="visible"
-            transition={{ duration: 0.65, delay: 0.25, ease: "easeOut" }}
-          >
-            {/* Mobile — lead image only */}
-            <div className="relative lg:hidden aspect-video rounded-xl overflow-hidden shadow-xl ring-2 ring-royal-600/40">
+          {/* ── Right: image grid ── */}
+          <div className="flex flex-col gap-4">
+
+            {/* Lead image — full-width, 16:9 */}
+            <motion.div
+              initial={{ opacity: prefersReduced ? 1 : 0, scale: prefersReduced ? 1 : 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.55, delay: 0.25, ease: "easeOut" }}
+              className="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl"
+            >
+              {/* Royal frame */}
+              <div
+                className="absolute inset-0 ring-2 ring-royal-600/50 rounded-xl z-10 pointer-events-none"
+                aria-hidden="true"
+              />
+              {/* Blueprint corner accents */}
+              <div
+                className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-royal-600 z-20 pointer-events-none"
+                aria-hidden="true"
+              />
+              <div
+                className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-royal-600 z-20 pointer-events-none"
+                aria-hidden="true"
+              />
               <Image
                 src="/hero-villa.jpeg"
                 alt="Contemporary two-storey villa — Gedo Holdings project"
@@ -161,71 +171,41 @@ export default function Hero() {
                 sizes="(max-width: 1024px) calc(100vw - 3rem), 46vw"
                 className="object-cover"
               />
-            </div>
+            </motion.div>
 
-            {/* Desktop — three-image collage */}
-            <div className="hidden lg:block relative h-[460px] select-none">
-
-              {/* Manor — back layer, bottom-left */}
-              <div className="absolute bottom-0 left-0 w-[48%] h-[57%] rounded-lg overflow-hidden shadow-md z-0">
+            {/* 2-up row — ~3:2 ratio */}
+            <div className="grid grid-cols-2 gap-4">
+              <motion.div
+                initial={{ opacity: prefersReduced ? 1 : 0, scale: prefersReduced ? 1 : 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.38, ease: "easeOut" }}
+                className="relative aspect-[3/2] rounded-lg overflow-hidden shadow-md"
+              >
                 <Image
                   src="/hero-manor.jpeg"
                   alt="Grand stone manor — Gedo Holdings project"
                   fill
-                  sizes="22vw"
+                  sizes="(max-width: 1024px) 50vw, 23vw"
                   className="object-cover"
                 />
-              </div>
-
-              {/* Bungalow — back layer, bottom-right */}
-              <div className="absolute bottom-0 right-0 w-[48%] h-[57%] rounded-lg overflow-hidden shadow-md z-0">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: prefersReduced ? 1 : 0, scale: prefersReduced ? 1 : 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.48, ease: "easeOut" }}
+                className="relative aspect-[3/2] rounded-lg overflow-hidden shadow-md"
+              >
                 <Image
                   src="/hero-bungalow.jpeg"
                   alt="Modern bungalow — Gedo Holdings project"
                   fill
-                  sizes="22vw"
+                  sizes="(max-width: 1024px) 50vw, 23vw"
                   className="object-cover"
                 />
-              </div>
-
-              {/* Villa — lead image, front-center */}
-              <div className="absolute top-0 left-[8%] right-[8%] h-[71%] rounded-xl overflow-hidden shadow-xl z-20">
-                <div
-                  className="absolute inset-0 ring-2 ring-royal-600/50 rounded-xl z-10 pointer-events-none"
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-royal-600 z-20 pointer-events-none"
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-royal-600 z-20 pointer-events-none"
-                  aria-hidden="true"
-                />
-                <Image
-                  src="/hero-villa.jpeg"
-                  alt="Contemporary two-storey villa — Gedo Holdings project"
-                  fill
-                  priority
-                  sizes="36vw"
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Horizontal measure-line between lead and secondaries */}
-              <div
-                className="absolute left-0 right-0 z-30 flex items-center gap-2 px-3"
-                style={{ top: "calc(71% - 1px)" }}
-                aria-hidden="true"
-              >
-                <span className="block h-px flex-1 bg-royal-600/15" />
-                <span className="font-mono text-[0.5rem] text-royal-600/50 uppercase tracking-[0.1em]">
-                  GH
-                </span>
-                <span className="block h-px w-6 bg-royal-600/50" />
-              </div>
+              </motion.div>
             </div>
-          </motion.div>
+
+          </div>
 
         </div>
       </div>

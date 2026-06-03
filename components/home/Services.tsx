@@ -1,4 +1,4 @@
-import { Home, LayoutPanelLeft, Wrench, DraftingCompass } from "lucide-react";
+import { Home, LayoutPanelLeft, Wrench, DraftingCompass, Grid3x3, Layers } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Eyebrow from "@/components/Eyebrow";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -54,6 +54,18 @@ const services: ServiceCardProps[] = [
     description:
       "From concept to detailed drawings, we translate your vision into buildable designs that meet NCA standards.",
   },
+  {
+    icon: Grid3x3,
+    title: "Cabro Installation",
+    description:
+      "Durable, well-laid cabro paving for driveways, compounds, and commercial yards — neat, load-bearing, and long-lasting.",
+  },
+  {
+    icon: Layers,
+    title: "Precast Panels Construction",
+    description:
+      "Factory-cast concrete panels for faster, stronger builds — walls, perimeter fencing, and structural elements delivered ready to install.",
+  },
 ];
 
 export default function Services() {
@@ -67,7 +79,7 @@ export default function Services() {
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service, i) => (
             <ScrollReveal key={service.title} delay={i * 75}>
               <ServiceCard {...service} />

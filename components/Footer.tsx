@@ -32,9 +32,9 @@ export default function Footer() {
             <Image
               src="/logo.png"
               alt="Gedo Holdings"
-              width={140}
-              height={40}
-              className="h-9 object-contain"
+              width={280}
+              height={80}
+              className="h-20 object-contain"
               style={{ width: "auto" }}
             />
             <p className="text-text-muted-inv text-sm leading-relaxed">

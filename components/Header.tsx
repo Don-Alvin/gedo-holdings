@@ -40,15 +40,15 @@ export default function Header() {
         scrolled ? "border-b border-ink-700" : "border-b border-transparent"
       }`}
     >
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8 h-16 flex items-center justify-between gap-8">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-8 h-16 md:h-20 flex items-center justify-between gap-8">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0" aria-label="Gedo Holdings home">
           <Image
             src="/logo.png"
             alt="Gedo Holdings"
-            width={140}
-            height={40}
-            className="h-9 object-contain"
+            width={200}
+            height={56}
+            className="h-10 md:h-14 object-contain"
             style={{ width: "auto" }}
             priority
           />

@@ -27,11 +27,11 @@ export default function TrustStrip() {
           </span>
         </div>
 
-        {/* Where we work */}
+        {/* Reach */}
         <div className="flex items-center gap-2.5 md:px-8">
           <span className="block w-5 h-px bg-royal-600 flex-shrink-0" />
           <span className="font-mono text-[0.7rem] text-text-muted-inv uppercase tracking-[0.12em]">
-            Nairobi · Kisumu · Nyeri · Kiambu · Migori
+            Projects Across Kenya
           </span>
         </div>
       </div>

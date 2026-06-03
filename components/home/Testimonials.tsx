@@ -1,47 +1,6 @@
 import { MapPin } from "lucide-react";
 import Eyebrow from "@/components/Eyebrow";
-
-interface Testimonial {
-  text: string;
-  name: string;
-  location: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    text: "[Real client quote — home construction, Nairobi]",
-    name: "[Client Name]",
-    location: "Nairobi",
-  },
-  {
-    text: "[Real client quote — office fit-out, Westlands]",
-    name: "[Client Name]",
-    location: "Westlands, Nairobi",
-  },
-  {
-    text: "[Real client quote — repair & renovation project]",
-    name: "[Client Name]",
-    location: "Kiambu",
-  },
-  {
-    text: "[Real client quote — new residential build]",
-    name: "[Client Name]",
-    location: "Kisumu",
-  },
-  {
-    text: "[Real client quote — architectural design]",
-    name: "[Client Name]",
-    location: "Nyeri",
-  },
-  {
-    text: "[Real client quote — home construction]",
-    name: "[Client Name]",
-    location: "Migori",
-  },
-];
-
-const col1 = testimonials.slice(0, 3);
-const col2 = testimonials.slice(3);
+import { firstColumn, secondColumn, thirdColumn, type Testimonial } from "@/data/testimonials";
 
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
@@ -60,17 +19,11 @@ function TestimonialCard({ item }: { item: Testimonial }) {
   );
 }
 
-function ScrollColumn({
-  items,
-  duration,
-}: {
-  items: Testimonial[];
-  duration: number;
-}) {
+function ScrollColumn({ items, duration }: { items: Testimonial[]; duration: number }) {
   const doubled = [...items, ...items];
   return (
     <div
-      className="relative overflow-hidden flex-1"
+      className="relative overflow-hidden w-full"
       style={{
         height: "420px",
         maskImage:
@@ -124,19 +77,21 @@ export default function Testimonials() {
             What our clients say
           </h2>
           <p className="font-sans text-base text-text-muted-inv leading-relaxed">
-            From Nairobi to Kisumu, Nyeri, Kiambu and Migori — what clients say
-            about building with us.
+            What clients across Kenya say about building with us.
           </p>
         </div>
 
         <div className="flex gap-5">
-          <ScrollColumn items={col1} duration={22} />
-          <ScrollColumn items={col2} duration={28} />
+          <div className="flex-1">
+            <ScrollColumn items={firstColumn} duration={22} />
+          </div>
+          <div className="hidden md:block flex-1">
+            <ScrollColumn items={secondColumn} duration={28} />
+          </div>
+          <div className="hidden lg:block flex-1">
+            <ScrollColumn items={thirdColumn} duration={25} />
+          </div>
         </div>
-
-        <p className="mt-6 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-ink-700">
-          Replace placeholders with real client quotes before launch.
-        </p>
       </div>
     </section>
   );
