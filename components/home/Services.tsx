@@ -34,7 +34,7 @@ const services: ServiceCardProps[] = [
     icon: Home,
     title: "Home Construction",
     description:
-      "From foundations to finishes, we build quality residential homes tailored to our clients' needs — on time and within budget.",
+      "From foundations to finishes, we build quality residential homes tailored to our clients' needs, on time and within budget.",
   },
   {
     icon: LayoutPanelLeft,
@@ -58,13 +58,13 @@ const services: ServiceCardProps[] = [
     icon: Grid3x3,
     title: "Cabro Installation",
     description:
-      "Durable, well-laid cabro paving for driveways, compounds, and commercial yards — neat, load-bearing, and long-lasting.",
+      "Durable, well-laid cabro paving for driveways, compounds, and commercial yards: neat, load-bearing, and long-lasting.",
   },
   {
     icon: Layers,
     title: "Precast Panels Construction",
     description:
-      "Factory-cast concrete panels for faster, stronger builds — walls, perimeter fencing, and structural elements delivered ready to install.",
+      "Factory-cast concrete panels for faster, stronger builds: walls, perimeter fencing, and structural elements delivered ready to install.",
   },
 ];
 

@@ -115,7 +115,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          placeholder="Describe your project — type of work, location, timeline..."
+          placeholder="Describe your project: type of work, location, timeline..."
           className={`${inputBase} resize-none`}
         />
       </div>
@@ -129,7 +129,7 @@ export default function ContactForm() {
       </button>
 
       <p className="font-mono text-[0.65rem] text-text-secondary uppercase tracking-[0.08em]">
-        * Required fields. Form delivery via Resend — wired up shortly.
+        * Required fields. Form delivery coming soon.
       </p>
     </form>
   );

@@ -148,18 +148,26 @@ const mono    = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400","500"], varia
 - *Data:* the **9 real testimonials** live in `src/data/testimonials.ts` (each `{ text, name, location, service? }`; cards render text + name + location only — `service` is metadata, not shown). They split cleanly into the component's 3 columns of 3 (`firstColumn`/`secondColumn`/`thirdColumn` are pre-exported). Locations span Nairobi, Westlands, Migori, Kiambu, Kitui, Kisumu and Nyeri — reinforcing the across-Kenya reach.
 - *Dependency note:* this component imports from `motion/react` while the hero/gallery use `framer-motion`. Same library (Motion), different package names — **standardize on one** (`motion` / `motion/react` is current) and align the hero/gallery imports so the project doesn't ship both.
 
-**Gallery** — built on the supplied **bento gallery** component (`InteractiveImageBentoGallery`): a horizontally draggable bento grid (framer-motion, `grid-flow-col`, drag-x), cards with a hover gradient overlay revealing title + short description, staggered reveal on view. Above it, a mono filter row with **three chips: All / Projects / Designs** (active = `royal-600`). Filtering re-renders the `imageItems` passed to the bento.
+**Gallery page** — a hero with a scrolling-image background, then the filterable masonry grid.
 
-- *Projects* = the 19 built-work photos (homes, office fit-outs, interiors, site/foundation shots).
-- *Designs* = the architectural renders (the 3 hero renders — villa, manor, bungalow — reused here, plus any other renders).
+**Gallery hero** — a tall section (~60–70vh) whose **background is vertically auto-scrolling columns of the gallery images**, using the **same scroll mechanism as the testimonials section** (`motion/react` `translateY` infinite loop, several columns at different speeds, top/bottom fade mask). Lay a dark `ink-950` overlay (~70%, or a gradient) over the scrolling images for legibility, and center the page title on top: mono eyebrow `OUR WORK` + Montserrat h1 (e.g. "Projects & Designs") + a one-line subtitle. The scrolling images are decorative — no labels on them. (Cleanest: factor the testimonials scroller into a shared `ScrollingColumn` that takes either text cards or image tiles.)
 
-**Click behaviour — keep the component's single-image modal.** Clicking a tile opens the supplied `ImageModal` (the clicked image, centered, dark backdrop blur, `X` to close, click-outside to dismiss) — as built. Use it as-is; no carousel. (Since the bento is drag-to-scroll, keep a small tap-vs-drag guard so a drag doesn't fire the modal open.)
+**Masonry grid** — below the hero, the supplied **`ImageGallery`** component: a multi-column grid (`sm:grid-cols-2 lg:grid-cols-3`), each column a vertical stack of images at their **natural aspect ratio** (no crop), each **fading in as it scrolls into view** (`useInView`), rounded with a thin border. A mono filter row above it — **All / Projects / Designs** (active = `royal-600`) — re-renders the items fed into the columns.
 
-Drive everything from a data manifest (`src/data/gallery.ts`): `{ src, category: 'projects' | 'designs', title, desc, span }`, images in `/public/gallery/`. `span` carries the bento sizing classes (e.g. `md:col-span-2 md:row-span-2` for feature tiles) — vary them for rhythm. Use `next/image` (or keep the component's `<img>` but lazy-load).
+- *Projects* = the 19 built-work photos (`project-01`–`project-19`: homes, office fit-outs, interiors, site/foundation shots).
+- *Designs* = the 14 architectural renders (`design-01`–`design-11` in `/public/gallery/`, plus the 3 hero renders — villa, manor, bungalow — reused from `/public`).
 
-*Token mapping:* the component uses shadcn semantic classes (`bg-background`, `text-foreground`, `bg-card`, `border`, `ring-ring`, `text-muted-foreground`). Map those CSS vars to our palette in `globals.css` — `--background`→`concrete-50`, `--foreground`→`ink-900`, `--card`→`paper`, `--border`→`concrete-200`, `--ring`→`royal-600`, `--muted-foreground`→`text-secondary` — so it inherits the design system, and restyle headings to `font-display`. Deps: `framer-motion`, `lucide-react`; needs `@/lib/utils` `cn` (shadcn) and the component in `/components/ui`.
+*Adapt the component:* swap its random picsum images + random portrait/landscape ratios for our real images from `src/data/gallery.ts`, distributed across the 3 columns round-robin so column heights stay balanced. Render each photo at its **natural aspect** (no forced crop) and keep the fade-in-on-view. Keep the lazy `<img>` for the natural-aspect look, or use `next/image` (`quality={90}`) for optimization — either way, never render larger than the source resolution (the current WhatsApp files are soft and will be swapped for originals).
 
-Note: a few office frames are clearly mid-installation (wrapped chairs, ladders, floor debris). For a portfolio, the most finished frames convert best — worth curating, though the foundation-to-finish shots work well as a deliberate "how we build" sequence.
+**Image labels — keep them simple.** Each image's only caption is its category: **"Project"** for projects, **"Architectural design"** for designs — no per-photo titles. Show it as a small mono label (bottom-left, on a subtle gradient — on hover or always-on) and use the same text in the modal and as the `alt`. So `gallery.ts` carries no individual titles; the label is derived from `category`.
+
+**Click behaviour — single-image modal (retained).** Clicking an image opens a centered lightbox (the image, its simple category label, dark backdrop blur, `X` to close, click-outside to dismiss). This component ships without one, so add a lightweight modal. (You liked the modal earlier; if you'd rather the masonry be view-only with no click-to-open, say so.)
+
+*Data:* `src/data/gallery.ts` → `{ id, url, category: 'projects' | 'designs' }` (no per-image titles — the label comes from `category`). Images in `/public/gallery/` (the 3 hero renders reused from `/public`). The `projects` / `designs` exports drive both the filter and the hero's scrolling columns.
+
+*Token mapping & deps:* the component uses shadcn classes (`bg-accent`, `border`) — map `--accent`→`concrete-100`, `--border`→`concrete-200` (plus the global shadcn→palette mapping). Deps: `framer-motion` (`useInView`), `@radix-ui/react-aspect-ratio` + an `aspect-ratio` component in `/components/ui`, and `cn` from `@/lib/utils`. Align the `useInView` import with the project's single motion package.
+
+Note: a few office frames are mid-installation (wrapped chairs, ladders, debris) — for a portfolio the most finished frames convert best, though the foundation-to-finish shots work as a deliberate "how we build" sequence.
 
 **Contact** — two columns ≥md: left = details (phone `0722901959` shown as **plain text for reference, not a dial link**; WhatsApp → `wa.me/254722901959` as the live action; `gedohomes@gmail.com`, Grey Park Annex along Eastern Bypass, **Mon–Sat 8am–5pm**) each with a lucide icon; right = form shell (Name, Phone, Email, Message). Inputs: `paper`, `1px border`, `radius-md`, focus → `royal-600` border + ring. Form is non-functional for now (wire Resend later). Below: Google Maps embed.
 
@@ -181,6 +189,7 @@ Note: a few office frames are clearly mid-installation (wrapped chairs, ladders,
 ## 7. Imagery & placeholders
 
 - Real project photos, consistent treatment, `next/image` for optimization, lazy-load below the fold.
+- **Image quality:** use full-resolution source files. The current renders/photos came via WhatsApp, which compresses and downscales — they look soft, especially in the hero. Replace them with the original exports (or files re-sent as WhatsApp "Document"). For the hero, set `next/image` `priority` and `quality={90}`, and never display an image larger than its intrinsic resolution (upscaling = blur).
 - Text-over-photo always gets an `ink-950` gradient overlay for legibility.
 - **Placeholders now:** solid `ink-900`/`concrete-100` blocks with a centered lucide `Building2`/`ImageOff` icon and a thin royal border, so layout reads correctly before client photos arrive. Swap by replacing files only.
 
@@ -236,3 +245,29 @@ Then use as utilities: `bg-royal-600`, `text-ink-900`, `bg-ink-950`, `border-con
 **Do:** dominant near-black + concrete with sharp royal accents · mono eyebrows + thin royal rules everywhere · crisp squared edges · big confident Montserrat headlines · generous whitespace · dark surfaces wherever the logo appears.
 
 **Don't:** Inter/Roboto/system fonts · pill-shaped bubbly UI · heavy drop shadows · purple/teal gradients · timid evenly-spread color · busy decoration that fights the engineered look.
+
+---
+
+## 11. Launch & SEO (functionality phase)
+
+Deferred from the design-first pass — implement when wiring functionality. (No Google Analytics — intentionally omitted.)
+
+**Sitemap & robots (Next.js App Router):**
+- `app/sitemap.ts` → `MetadataRoute.Sitemap` listing `/`, `/gallery`, `/contact`.
+- `app/robots.ts` → allow all, `sitemap: ${SITE_URL}/sitemap.xml`.
+- Set `metadataBase` in the root layout; read the origin from a `SITE_URL` env/const so it swaps from the `.vercel.app` URL to a custom domain with one change.
+
+**Metadata & verification:**
+- Per-page `metadata` (title, description, Open Graph) in each `page.tsx`.
+- Google Search Console verification via `metadata.verification.google = '<token>'` in the root layout (token comes from Search Console; redeploy to apply).
+
+**Structured data (JSON-LD):** a `HomeAndConstructionBusiness` / `GeneralContractor` `LocalBusiness` block in the root layout — `name` "Gedo Holdings", `legalName` "Gedo Holdings Ltd", `telephone` +254722901959, `email` gedohomes@gmail.com, `address` (Grey Park Annex, Eastern Bypass), `openingHours` Mo–Sa 08:00–17:00, `areaServed` Kenya, `sameAs` [Facebook, Instagram], `logo`/`image`.
+
+**Contact form email (Resend):**
+- `npm i resend`; API key in a server-only `RESEND_API_KEY` env (add to Vercel; never expose client-side — any var without `NEXT_PUBLIC_` stays server-only).
+- Route handler `app/api/contact/route.ts` (`export async function POST`): validate Name/Phone/Email/Message, then `resend.emails.send({ from, to: 'gedohomes@gmail.com', replyTo: <visitor's email>, subject, html | react })`. Return JSON; the form shows loading / success / error states. (Optional: a react-email template for a tidy message.)
+- **`from` must be a Resend-verified sender — you cannot send "from" a gmail address.** For now (on the `.vercel.app` URL, no custom domain) use Resend's test sender `onboarding@resend.dev`, which delivers to the Resend account's own email — so create the account with `gedohomes@gmail.com`. For production, verify a domain in Resend via DNS and send from e.g. `noreply@gedoholdings.co.ke`. Set `replyTo` to the visitor's email so replies reach the client directly.
+
+**Contact map:** Google Maps embed (iframe) of the office location on the Contact page.
+
+**Manual (outside the codebase):** Vercel deploy → live URL; create a Resend account (use gedohomes@gmail.com so the test sender can deliver to it) and copy the API key into Vercel env; add the site as a Search Console property and submit the sitemap; create a Google Business Profile (service-area business — see chat notes).

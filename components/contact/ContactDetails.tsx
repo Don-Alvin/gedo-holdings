@@ -33,8 +33,8 @@ export default function ContactDetails() {
         </h2>
         <p className="font-sans text-base text-text-secondary leading-relaxed max-w-[420px]">
           Whether you&apos;re planning a new home, an office fit-out, or a
-          renovation, our team is ready to help. Reach us by WhatsApp or email
-          — we respond promptly.
+          renovation, our team is ready to help. Reach us by WhatsApp or email.
+          We respond promptly.
         </p>
       </div>
 
@@ -55,8 +55,9 @@ export default function ContactDetails() {
             href="https://wa.me/254722901959"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-sans text-ink-900 font-medium hover:text-royal-600 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-royal-600 text-white text-sm font-medium hover:bg-royal-700 transition-colors shadow-[0_6px_20px_rgba(30,71,230,0.25)] mt-1 self-start"
           >
+            <MessageCircle size={15} />
             Chat on WhatsApp
           </a>
         </DetailRow>

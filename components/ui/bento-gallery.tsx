@@ -6,7 +6,8 @@ import { motion, useMotionValue, useReducedMotion } from "motion/react";
 import { X, Building2 } from "lucide-react";
 
 export interface BentoItem {
-  src: string;
+  id: string;
+  url: string;
   category: "projects" | "designs";
   title: string;
   desc: string;
@@ -53,9 +54,10 @@ function ImageModal({
       >
         <div className="relative w-full aspect-video">
           <Image
-            src={item.src}
+            src={item.url}
             alt={item.title}
             fill
+            quality={90}
             sizes="(max-width: 768px) 100vw, 80vw"
             className="object-contain"
             priority
@@ -120,9 +122,10 @@ function BentoCard({
       }}
     >
       <Image
-        src={item.src}
+        src={item.url}
         alt={item.title}
         fill
+        quality={90}
         sizes={
           item.span.includes("col-span-2")
             ? "(max-width: 768px) 80vw, 45vw"
@@ -156,7 +159,6 @@ export function InteractiveImageBentoGallery({ items }: { items: BentoItem[] }) 
   const x = useMotionValue(0);
   const [constraints, setConstraints] = useState({ left: 0, right: 0 });
 
-  // Recalculate drag bounds when items or window size change
   const recalc = useCallback(() => {
     if (!containerRef.current || !innerRef.current) return;
     const containerW = containerRef.current.offsetWidth;
@@ -165,7 +167,7 @@ export function InteractiveImageBentoGallery({ items }: { items: BentoItem[] }) 
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(recalc, 60); // let layout settle
+    const t = setTimeout(recalc, 60);
     window.addEventListener("resize", recalc);
     return () => {
       clearTimeout(t);
@@ -188,7 +190,6 @@ export function InteractiveImageBentoGallery({ items }: { items: BentoItem[] }) 
 
   return (
     <>
-      {/* Clip overflow so the drag reveal doesn't bleed out */}
       <div ref={containerRef} className="overflow-hidden">
         <motion.div
           ref={innerRef}
@@ -208,7 +209,7 @@ export function InteractiveImageBentoGallery({ items }: { items: BentoItem[] }) 
         >
           {items.map((item, i) => (
             <BentoCard
-              key={item.src}
+              key={item.id}
               item={item}
               onOpen={setModalItem}
               index={i}

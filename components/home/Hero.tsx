@@ -88,7 +88,7 @@ export default function Hero() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="font-sans text-lg text-text-muted-inv leading-relaxed mb-10 max-w-[520px]"
             >
-              Design, construction, and finishing across Kenya — delivered by an
+              Design, construction, and finishing across Kenya, delivered by an
               NCA-registered team with 8 years on the ground.
             </motion.p>
 
@@ -165,7 +165,7 @@ export default function Hero() {
               />
               <Image
                 src="/hero-villa.jpeg"
-                alt="Contemporary two-storey villa — Gedo Holdings project"
+                alt="Contemporary two-storey villa by Gedo Holdings"
                 fill
                 priority
                 sizes="(max-width: 1024px) calc(100vw - 3rem), 46vw"
@@ -183,7 +183,7 @@ export default function Hero() {
               >
                 <Image
                   src="/hero-manor.jpeg"
-                  alt="Grand stone manor — Gedo Holdings project"
+                  alt="Grand stone manor by Gedo Holdings"
                   fill
                   sizes="(max-width: 1024px) 50vw, 23vw"
                   className="object-cover"
@@ -197,7 +197,7 @@ export default function Hero() {
               >
                 <Image
                   src="/hero-bungalow.jpeg"
-                  alt="Modern bungalow — Gedo Holdings project"
+                  alt="Modern bungalow by Gedo Holdings"
                   fill
                   sizes="(max-width: 1024px) 50vw, 23vw"
                   className="object-cover"

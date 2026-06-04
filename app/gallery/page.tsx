@@ -1,31 +1,18 @@
 import type { Metadata } from "next";
-import Eyebrow from "@/components/Eyebrow";
+import GalleryHero from "@/components/gallery/GalleryHero";
 import GalleryClient from "@/components/gallery/GalleryClient";
 
 export const metadata: Metadata = {
-  title: "Gallery — Gedo Holdings Ltd",
+  title: "Gallery | Gedo Holdings Ltd",
   description:
-    "Browse our portfolio of completed projects: home construction, office partitioning, and repair & renovation across Nairobi.",
+    "Browse our portfolio of completed projects: home construction, office partitioning, and repair & renovation across Kenya.",
 };
 
 export default function GalleryPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-ink-950 py-16 md:py-24 border-b border-ink-700">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-          <Eyebrow text="Our Work" className="mb-5" light />
-          <h1 className="font-display text-[clamp(2.25rem,4vw,3rem)] font-bold text-text-inverse mb-4">
-            Project Gallery
-          </h1>
-          <p className="font-sans text-base text-text-muted-inv max-w-[520px] leading-relaxed">
-            A selection of architectural designs and completed builds across
-            Nairobi. Project photos added as work progresses.
-          </p>
-        </div>
-      </section>
+      <GalleryHero />
 
-      {/* Gallery body */}
       <section className="bg-concrete-50 py-14 md:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8">
           <GalleryClient />
