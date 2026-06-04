@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   title: "Gedo Holdings Ltd — Building Dreams. Enhancing Lives.",
   description:
     "NCA registered construction company in Nairobi, Kenya. Home construction, office partitioning, and repair & renovation services since 2018.",
+  verification: {
+    google: "HSV5p3dNoVTDLsFGcLba_wPYgvOzxzsIxBxkEXR-RSM",
+  },
+
 };
 
 export default function RootLayout({
