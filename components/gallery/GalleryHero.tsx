@@ -34,7 +34,6 @@ function ScrollImageColumn({
               alt=""
               fill
               quality={90}
-              quality={90}
               className="object-cover"
               loading="lazy"
               sizes="(max-width: 640px) 50vw, 25vw"
