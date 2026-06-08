@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description:
     "NCA registered construction company in Nairobi, Kenya. Home construction, office partitioning, and repair & renovation services since 2018.",
   verification: {
-    google: "HSV5p3dNoVTDLsFGcLba_wPYgvOzxzsIxBxkEXR-RSM",
+    google:"XsR4E8BNXpbTzVZtYxeYt0FBYegFLLYYMTuX5_HMzdA" ,
   },
 
 };
