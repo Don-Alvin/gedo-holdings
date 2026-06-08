@@ -167,6 +167,7 @@ export default function Hero() {
                 src="/hero-villa.jpeg"
                 alt="Contemporary two-storey villa by Gedo Holdings"
                 fill
+                quality={90}
                 priority
                 sizes="(max-width: 1024px) calc(100vw - 3rem), 46vw"
                 className="object-cover"
@@ -185,6 +186,7 @@ export default function Hero() {
                   src="/hero-manor.jpeg"
                   alt="Grand stone manor by Gedo Holdings"
                   fill
+                  quality={90}
                   sizes="(max-width: 1024px) 50vw, 23vw"
                   className="object-cover"
                 />
@@ -199,6 +201,7 @@ export default function Hero() {
                   src="/hero-bungalow.jpeg"
                   alt="Modern bungalow by Gedo Holdings"
                   fill
+                  quality={90}
                   sizes="(max-width: 1024px) 50vw, 23vw"
                   className="object-cover"
                 />

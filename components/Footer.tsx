@@ -34,6 +34,7 @@ export default function Footer() {
               alt="Gedo Holdings"
               width={280}
               height={80}
+              quality={90}
               className="h-20 object-contain"
               style={{ width: "auto" }}
             />
@@ -45,6 +46,7 @@ export default function Footer() {
               alt="NCA Registered"
               width={80}
               height={80}
+              quality={90}
               className="h-14 object-contain"
               style={{ width: "auto" }}
             />

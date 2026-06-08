@@ -3,9 +3,9 @@ import GalleryHero from "@/components/gallery/GalleryHero";
 import GalleryClient from "@/components/gallery/GalleryClient";
 
 export const metadata: Metadata = {
-  title: "Gallery | Gedo Holdings Ltd",
+  title: "Our Work",
   description:
-    "Browse our portfolio of completed projects: home construction, office partitioning, and repair & renovation across Kenya.",
+    "Completed projects and architectural designs by Gedo Holdings — homes, offices and finishes built across Kenya.",
 };
 
 export default function GalleryPage() {

@@ -19,6 +19,7 @@ export default function TrustStrip() {
             alt="NCA Registered"
             width={28}
             height={28}
+            quality={90}
             className="h-7 object-contain"
             style={{ width: "auto" }}
           />

@@ -6,9 +6,9 @@ import ContactDetails from "@/components/contact/ContactDetails";
 import ContactForm from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact | Gedo Holdings Ltd",
+  title: "Contact",
   description:
-    "Get in touch with Gedo Holdings for a free quote on home construction, office partitioning, or renovation work in Nairobi.",
+    "Talk to Gedo Holdings about construction, design and finishing across Kenya. WhatsApp or message us to start your project.",
 };
 
 export default function ContactPage() {
@@ -64,22 +64,17 @@ export default function ContactPage() {
               className="rounded-lg"
             />
           */}
-          <div className="rounded-lg overflow-hidden border border-concrete-200 h-72 md:h-[450px] bg-concrete-100 flex flex-col items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-md bg-royal-50 flex items-center justify-center">
-              <MapPin size={20} className="text-royal-600" strokeWidth={1.75} />
-            </div>
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-text-secondary">
-              Map coming soon
-            </p>
-            <a
-              href="https://maps.google.com/?q=Grey+Park+Annex+Eastern+Bypass+Nairobi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-royal-600 hover:text-royal-700 transition-colors"
-            >
-              Open in Google Maps
-            </a>
-          </div>
+          <iframe
+            src="https://maps.google.com/maps?q=Grey%20Park%20Annex%20Eastern%20Bypass%20Nairobi&output=embed"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Gedo Holdings office location"
+            className="rounded-lg border border-concrete-200 h-72 md:h-[450px] w-full"
+          />
         </div>
       </section>
     </>

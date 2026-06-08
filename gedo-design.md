@@ -250,26 +250,62 @@ Then use as utilities: `bg-royal-600`, `text-ink-900`, `bg-ink-950`, `border-con
 
 ---
 
-## 11. Launch & SEO (functionality phase)
+## 11. SEO & Launch
 
-Deferred from the design-first pass — implement when wiring functionality. (No Google Analytics — intentionally omitted.)
+The functionality/launch layer (deferred from the design-first build). **No Google Analytics** — intentionally omitted.
 
-**Sitemap & robots (Next.js App Router):**
+### Site icons — how the logo appears in search & browser tabs
+The wide logo lockup is illegible at favicon size and renders as a dark blob in Google. Use the **square house mark on a royal-blue background** (assets generated: `favicon.ico`, `icon.png` 512, `apple-icon.png` 180, `icon-192.png`). Next.js App Router file conventions auto-inject the tags — drop them in `app/`:
+- `app/favicon.ico` · `app/icon.png` (512) · `app/apple-icon.png` (180) · `app/icon-192.png` only if a web manifest is added.
+Browser tabs update on redeploy; Google refreshes the SERP favicon on its own recrawl (days to weeks).
+
+### Metadata (per page)
+- `metadataBase` in the root layout, origin from a `SITE_URL` const/env so it swaps from `.vercel.app` to `https://gedoholdings.co.ke` in one place (drives canonical + absolute OG URLs).
+- Title template: root `title.template = "%s | Gedo Holdings"`, `title.default = "Gedo Holdings Ltd: Building Dreams, Enhancing Lives."`
+- Per-page title + description:
+  - **Home** — keep title "Gedo Holdings Ltd: Building Dreams, Enhancing Lives."; description (≤155, reuse for OG): "Building across Kenya since 2018. NCA registered for home construction, architectural design, office partitioning, cabro, precast panels and renovations."
+  - **Gallery** — title "Our Work"; description: "Completed projects and architectural designs by Gedo Holdings — homes, offices and finishes built across Kenya."
+  - **Contact** — title "Contact"; description: "Talk to Gedo Holdings about construction, design and finishing across Kenya. WhatsApp or message us to start your project."
+- One `<h1>` per page; `<html lang="en">`.
+
+### Open Graph / social cards (link previews)
+So shares on WhatsApp, Facebook, etc. render a card, not a bare link:
+- `openGraph` (title, description, url, `siteName` "Gedo Holdings", `locale` "en_KE", `type` "website") + an **`og:image` (1200×630)** — a branded card (logo on royal/ink, or a strong render with the wordmark).
+- `twitter.card = "summary_large_image"`, same image.
+- Place the card at `app/opengraph-image.png` (App Router convention, auto-wired). **Asset needed** — flag for creation.
+
+### Structured data (JSON-LD, root layout)
+A `HomeAndConstructionBusiness` / `GeneralContractor` block: `name` "Gedo Holdings", `legalName` "Gedo Holdings Ltd", `url` (SITE_URL), `logo` + `image` (absolute URLs), `telephone` +254722901959, `email` gedohomes@gmail.com, `address` (Grey Park Annex, Eastern Bypass), `areaServed` "Kenya", `openingHoursSpecification` Mo–Sa 08:00–17:00, `sameAs` [Facebook @gedoholdings, Instagram @gedohomes], `priceRange` (e.g. "$$"). No `aggregateRating`/reviews unless they are real.
+
+### Sitemap & robots
 - `app/sitemap.ts` → `MetadataRoute.Sitemap` listing `/`, `/gallery`, `/contact`.
-- `app/robots.ts` → allow all, `sitemap: ${SITE_URL}/sitemap.xml`.
-- Set `metadataBase` in the root layout; read the origin from a `SITE_URL` env/const so it swaps from the `.vercel.app` URL to a custom domain with one change.
+- `app/robots.ts` → allow all; `sitemap: ${SITE_URL}/sitemap.xml`.
 
-**Metadata & verification:**
-- Per-page `metadata` (title, description, Open Graph) in each `page.tsx`.
-- Google Search Console verification via `metadata.verification.google = '<token>'` in the root layout (token comes from Search Console; redeploy to apply).
+### Search Console verification
+`metadata.verification.google = '<token>'` in the root layout (token from Search Console; redeploy to apply), then submit the sitemap.
 
-**Structured data (JSON-LD):** a `HomeAndConstructionBusiness` / `GeneralContractor` `LocalBusiness` block in the root layout — `name` "Gedo Holdings", `legalName` "Gedo Holdings Ltd", `telephone` +254722901959, `email` gedohomes@gmail.com, `address` (Grey Park Annex, Eastern Bypass), `openingHours` Mo–Sa 08:00–17:00, `areaServed` Kenya, `sameAs` [Facebook, Instagram], `logo`/`image`.
+### Image & content SEO
+- Descriptive `alt` on every image (e.g. "Completed two-storey home by Gedo Holdings"), not bare "Project". `next/image` everywhere.
+- Semantic landmarks (`header`/`nav`/`main`/`footer`) and sensible heading order.
 
-**Contact form email (Resend):**
-- `npm i resend`; API key in a server-only `RESEND_API_KEY` env (add to Vercel; never expose client-side — any var without `NEXT_PUBLIC_` stays server-only).
-- Route handler `app/api/contact/route.ts` (`export async function POST`): validate Name/Phone/Email/Message, then `resend.emails.send({ from, to: 'gedohomes@gmail.com', replyTo: <visitor's email>, subject, html | react })`. Return JSON; the form shows loading / success / error states. (Optional: a react-email template for a tidy message.)
-- **`from` uses the verified `gedoholdings.co.ke` domain** (verified in Resend), so the form sends to `gedohomes@gmail.com` (or any recipient) with no test-sender limit. Use `from: 'Gedo Holdings <noreply@gedoholdings.co.ke>'` (any address on the verified domain works — `contact@`, `hello@`, etc.; it needn't be a real inbox). Set `replyTo` to the visitor's email so replies reach the client directly. (`onboarding@resend.dev` was only the pre-verification test sender.)
+### Performance (Core Web Vitals — affects ranking and mobile users in Kenya)
+- `next/image`: `priority` on the hero, lazy elsewhere, `quality={90}`, never upscale beyond source resolution.
+- `next/font` (Montserrat / Mulish / IBM Plex Mono) with subsetting; compress images; keep JS light; HTTPS via Vercel.
 
-**Contact map:** Google Maps embed (iframe) of the office location on the Contact page.
+### Web manifest (optional, PWA/Android)
+`app/manifest.ts` → `name` "Gedo Holdings", `short_name` "Gedo", `icons` (192, 512), `theme_color` "#1E47E6", `background_color` "#0A0C11", `display` "standalone".
 
-**Manual (outside the codebase):** Vercel deploy → live URL; create a Resend account (use gedohomes@gmail.com so the test sender can deliver to it) and copy the API key into Vercel env; add the site as a Search Console property and submit the sitemap; create a Google Business Profile (service-area business — see chat notes).
+### Contact form email (Resend)
+- `npm i resend`; `RESEND_API_KEY` server-only (in `.env.local` + Vercel; never client-side, never commit `.env.local`).
+- `app/api/contact/route.ts` (POST): validate Name/Phone/Email/Message + a hidden honeypot; `resend.emails.send({ from: 'Gedo Holdings <noreply@gedoholdings.co.ke>', to: 'gedohomes@gmail.com', replyTo: <visitor email>, subject, html })`; return JSON + status. The `gedoholdings.co.ke` domain is verified in Resend, so it delivers anywhere.
+- Wire the form shell to POST with loading / success / error states.
+
+### Contact map
+Google Maps embed (iframe) of the office on the Contact page.
+
+### Manual (off-codebase)
+- Point the site at `gedoholdings.co.ke` in Vercel; set `SITE_URL` to it.
+- Add the site as a Search Console property; submit `sitemap.xml`.
+- Create a **Google Business Profile** (service-area business — the single biggest local-SEO lever; video verification is the current default).
+- Keep **NAP consistent** — identical name, address, phone across the site, GBP, and socials.
+- No Analytics.
