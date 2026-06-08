@@ -45,27 +45,8 @@ export default function ContactPage() {
           <h2 className="font-display text-2xl font-bold text-ink-900 mb-8">
             Grey Park Annex, Eastern Bypass
           </h2>
-
-          {/*
-            To embed the real map:
-            1. Open Google Maps and search "Grey Park Annex Eastern Bypass Nairobi"
-            2. Click Share → Embed a map → copy the iframe src URL
-            3. Replace the <div> placeholder below with:
-
-            <iframe
-              src="PASTE_EMBED_SRC_HERE"
-              width="100%"
-              height="450"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Gedo Holdings office location"
-              className="rounded-lg"
-            />
-          */}
           <iframe
-            src="https://maps.google.com/maps?q=Grey%20Park%20Annex%20Eastern%20Bypass%20Nairobi&output=embed"
+            src="https://maps.app.goo.gl/u2UqaJCjTP4qqxsC6"
             width="100%"
             height="450"
             style={{ border: 0 }}

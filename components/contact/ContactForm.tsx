@@ -198,7 +198,7 @@ export default function ContactForm() {
       </button>
 
       <p className="font-mono text-[0.65rem] text-text-secondary uppercase tracking-[0.08em]">
-        * Required fields. Form delivery powered by Resend.
+        * Required fields.
       </p>
     </form>
   );
