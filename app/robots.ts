@@ -1,8 +1,13 @@
-import { SITE_URL } from "@/lib/site";
+import type { MetadataRoute } from "next";
 
-export default function robots() {
-  return `User-agent: *
-Allow: /
-Sitemap: ${SITE_URL}/sitemap.xml
-`;
+const SITE_URL = process.env.SITE_URL ?? "https://gedoholdings.co.ke";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+    },
+    sitemap: `${SITE_URL}/sitemap.xml`,
+  };
 }
