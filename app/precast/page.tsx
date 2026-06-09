@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { SITE_URL } from "@/lib/site";
 
+import QuoteForm from "./quote-form";
+
 // Note: This page is dynamic due to form state, so we use generateMetadata at export time
 export const generateMetadata = (): Metadata => {
   const title = "Precast Concrete Construction in Kenya | Gedo Holdings";
