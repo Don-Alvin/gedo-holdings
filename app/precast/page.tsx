@@ -13,6 +13,34 @@ import { SITE_URL } from "@/lib/site";
 
 import QuoteForm from "./quote-form";
 
+// Precast stats placeholders — replace with client's substantiated figures before running ads
+export const precastStats = [
+  {
+    id: "cost",
+    eyebrow: "COST",
+    value: "Up to 40%",
+    sub: "lower cost than stone",
+    variant: "primary",
+    // TODO: confirm and substantiate this percentage with client data before ads
+  },
+  {
+    id: "time",
+    eyebrow: "TIME",
+    value: "~3 weeks",
+    sub: "foundation to shell",
+    variant: "dark",
+    // TODO: confirm average lead-time for typical project sizes
+  },
+  {
+    id: "efficiency",
+    eyebrow: "EFFICIENCY",
+    value: "Lower bills",
+    sub: "energy-efficient, low maintenance",
+    variant: "dark",
+    // TODO: provide measured energy-savings or case-study
+  },
+];
+
 export const metadata: Metadata = {
   title: "Precast Concrete Construction in Kenya | Gedo Holdings",
   description:
@@ -92,13 +120,31 @@ export default function PrecastPage() {
               </div>
             </div>
 
-            {/* Right column: hero image placeholder */}
+            {/* Right column: metric cards (top wide, two below) */}
             <div className="relative aspect-square md:aspect-auto md:h-96">
-              <div className="absolute inset-0 bg-gradient-to-b from-ink-800 to-ink-900 rounded-lg border border-ink-700 flex items-center justify-center overflow-hidden">
-                {/* TODO: Replace this placeholder with live-build hero photo */}
-                <div className="flex flex-col items-center gap-3 text-text-muted-inv">
-                  <Building2 size={48} opacity={0.5} />
-                  <p className="text-sm font-mono uppercase tracking-wide">Live build photo (TODO)</p>
+              <div className="absolute inset-0 rounded-lg border border-ink-700 overflow-hidden p-4 bg-gradient-to-b from-ink-800 to-ink-900">
+                <div className="h-full w-full flex flex-col gap-4">
+                  {/* Top wide card */}
+                  <div className="rounded-lg p-5 bg-royal-600 text-white">
+                    <p className="font-mono text-xs font-medium tracking-widest uppercase">{precastStats[0].eyebrow}</p>
+                    <div className="font-display font-bold text-2xl md:text-3xl mt-2">{precastStats[0].value}</div>
+                    <p className="text-sm opacity-90 mt-1">{precastStats[0].sub}</p>
+                  </div>
+
+                  {/* Bottom two cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="rounded-lg p-5 bg-ink-900 border border-ink-700 text-text-inverse">
+                      <p className="font-mono text-xs font-medium tracking-widest text-royal-500 uppercase">{precastStats[1].eyebrow}</p>
+                      <div className="font-display font-bold text-2xl md:text-3xl mt-2">{precastStats[1].value}</div>
+                      <p className="text-sm opacity-90 mt-1">{precastStats[1].sub}</p>
+                    </div>
+
+                    <div className="rounded-lg p-5 bg-ink-900 border border-ink-700 text-text-inverse">
+                      <p className="font-mono text-xs font-medium tracking-widest text-royal-500 uppercase">{precastStats[2].eyebrow}</p>
+                      <div className="font-display font-bold text-2xl md:text-3xl mt-2">{precastStats[2].value}</div>
+                      <p className="text-sm opacity-90 mt-1">{precastStats[2].sub}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
