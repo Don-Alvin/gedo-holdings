@@ -121,24 +121,24 @@ export default function PrecastPage() {
             </div>
 
             {/* Right column: metric cards (top wide, two below) */}
-            <div className="relative md:h-full">
-              <div className="absolute inset-0 rounded-lg border border-ink-700 overflow-hidden p-4 bg-gradient-to-b from-ink-800 to-ink-900 flex flex-col">
-                {/* Top wide card: larger height */}
-                <div className="rounded-lg p-6 bg-royal-600 text-white flex-shrink-0 h-44 md:h-56 lg:h-64">
+            <div className="relative">
+              <div className="relative rounded-lg border border-ink-700 overflow-hidden p-4 bg-gradient-to-b from-ink-800 to-ink-900 flex flex-col">
+                {/* Top wide card: more moderate height */}
+                <div className="rounded-lg p-6 bg-royal-600 text-white flex-shrink-0 h-36 md:h-44">
                   <p className="font-mono text-xs font-medium tracking-widest uppercase">{precastStats[0].eyebrow}</p>
-                  <div className="font-display font-bold text-2xl md:text-4xl mt-2">{precastStats[0].value}</div>
+                  <div className="font-display font-bold text-2xl md:text-3xl mt-2">{precastStats[0].value}</div>
                   <p className="text-sm opacity-90 mt-1">{precastStats[0].sub}</p>
                 </div>
 
                 {/* Bottom two cards fill remaining height */}
-                <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
-                  <div className="rounded-lg p-5 bg-ink-900 border border-ink-700 text-text-inverse h-full flex flex-col justify-start">
+                <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="rounded-lg p-5 bg-ink-900 border border-ink-700 text-text-inverse min-h-[180px]">
                     <p className="font-mono text-xs font-medium tracking-widest text-royal-500 uppercase">{precastStats[1].eyebrow}</p>
                     <div className="font-display font-bold text-2xl md:text-3xl mt-2">{precastStats[1].value}</div>
                     <p className="text-sm opacity-90 mt-1">{precastStats[1].sub}</p>
                   </div>
 
-                  <div className="rounded-lg p-5 bg-ink-900 border border-ink-700 text-text-inverse h-full flex flex-col justify-start">
+                  <div className="rounded-lg p-5 bg-ink-900 border border-ink-700 text-text-inverse min-h-[180px]">
                     <p className="font-mono text-xs font-medium tracking-widest text-royal-500 uppercase">{precastStats[2].eyebrow}</p>
                     <div className="font-display font-bold text-2xl md:text-3xl mt-2">{precastStats[2].value}</div>
                     <p className="text-sm opacity-90 mt-1">{precastStats[2].sub}</p>
