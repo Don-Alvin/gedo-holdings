@@ -252,7 +252,7 @@ Then use as utilities: `bg-royal-600`, `text-ink-900`, `bg-ink-950`, `border-con
 
 ## 11. SEO & Launch
 
-The functionality/launch layer (deferred from the design-first build). **No Google Analytics** — intentionally omitted.
+The functionality/launch layer (deferred from the design-first build). Analytics and ad-conversion tracking are covered in §13.
 
 ### Site icons — how the logo appears in search & browser tabs
 The wide logo lockup is illegible at favicon size and renders as a dark blob in Google. Use the **square house mark on a royal-blue background** (assets generated: `favicon.ico`, `icon.png` 512, `apple-icon.png` 180, `icon-192.png`). Next.js App Router file conventions auto-inject the tags — drop them in `app/`:
@@ -263,7 +263,7 @@ Browser tabs update on redeploy; Google refreshes the SERP favicon on its own re
 - `metadataBase` in the root layout, origin from a `SITE_URL` const/env so it swaps from `.vercel.app` to `https://gedoholdings.co.ke` in one place (drives canonical + absolute OG URLs).
 - Title template: root `title.template = "%s | Gedo Holdings"`, `title.default = "Gedo Holdings Ltd: Building Dreams, Enhancing Lives."`
 - Per-page title + description:
-  - **Home** — keep title "Gedo Holdings Ltd: Building Dreams, Enhancing Lives."; description (≤155, reuse for OG): "Building across Kenya since 2018. NCA registered for home construction, architectural design, office partitioning, cabro, precast panels and renovations."
+  - **Home** — keep title "Gedo Holdings Ltd: Building Dreams, Enhancing Lives."; description (≤155, reuse for OG): "Trusted, NCA registered construction company across Kenya since 2018. Homes, offices, architectural design, renovations, cabro paving and precast panels."
   - **Gallery** — title "Our Work"; description: "Completed projects and architectural designs by Gedo Holdings — homes, offices and finishes built across Kenya."
   - **Contact** — title "Contact"; description: "Talk to Gedo Holdings about construction, design and finishing across Kenya. WhatsApp or message us to start your project."
 - One `<h1>` per page; `<html lang="en">`.
@@ -308,4 +308,48 @@ Google Maps embed (iframe) of the office on the Contact page.
 - Add the site as a Search Console property; submit `sitemap.xml`.
 - Create a **Google Business Profile** (service-area business — the single biggest local-SEO lever; video verification is the current default).
 - Keep **NAP consistent** — identical name, address, phone across the site, GBP, and socials.
-- No Analytics.
+- Analytics + ad-conversion tracking: see §13 (GTM hub for GA4 + Google Ads + Meta Pixel).
+
+---
+
+## 12. Precast Construction page (`/precast`)
+
+Dedicated page for the client's new flagship offering — **precast concrete panel house construction** (first client just closed; one live build in progress). Serves double duty: a **nav-linked page** (menu label "Precast Construction") for site visitors and organic SEO, *and* the landing page for the Meta + Google Ads campaigns. One page for now — don't split off a separate ad-only lander until ad spend justifies it.
+
+Built as a **subfolder on the main domain** (`gedoholdings.co.ke/precast`), not a subdomain — SEO consolidates on the one domain and the page targets organic searches like "precast house Kenya" / "precast construction Kenya". Route: `app/precast/page.tsx`; add to the **main nav** (Home · Precast Construction · Gallery · Contact) with a small **"NEW" badge** on the Precast Construction item (IBM Plex Mono, uppercase, royal-600 pill, white text; static, no animation; renders in the mobile nav too; real text for screen readers; gate behind a `navBadges` constant so removing it later is one line); include in `sitemap.ts`; keep it indexable with its own metadata.
+
+**Principles:** same design system (royal/ink/concrete, Montserrat/Mulish/mono). Mobile-first (most ad traffic in Kenya is mobile). Fast (Core Web Vitals feeds Google Ads Quality Score). Conversion-focused but **keeps the standard site nav** (it's a nav-linked, dual-purpose page) — the dominant goal is still to capture a precast lead, so carry one clear primary CTA throughout.
+
+**Layout (top → bottom):**
+- Header — standard site nav (this is a nav-linked page), with a prominent WhatsApp + "Get a quote" CTA.
+- Hero — mono eyebrow "PRECAST CONSTRUCTION · ACROSS KENYA"; Montserrat headline matching the ad hook (placeholder, TBD with client — e.g. "Your home, built in weeks not months"); one-line value subhead (speed + cost); primary CTA = inline quote form, WhatsApp secondary; hero image from the **live build** (the campaign's anchor proof).
+- Why precast — 3–4 benefit cards (build speed, lower cost, factory quality control, insulation/comfort), mono labels + short copy. Position on speed/cost/modern, NOT "stronger than stone" (don't overclaim).
+- Live build / gallery — the in-progress build is the hero proof (stage-by-stage photos, time-lapse, finished walkthrough when ready). Portfolio is thin at launch (one project), so lean on this; grow it as builds complete.
+- How it works (optional) — 3 steps: consult → design & cast → install.
+- Trust — NCA registered, since 2018, across Kenya; precast-specific testimonials if available.
+- Final CTA band — headline + quote form / WhatsApp.
+
+**Lead form:** Name, Phone, Project location/size (optional), Message. POSTs to the existing Resend route with a `source: "precast-campaign"` tag (subject prefix "[Precast]") so these leads are identifiable. Honeypot + loading/success/error states. On success, fire the conversion events in §13.
+
+**Metadata:** title "Precast Concrete Construction in Kenya | Gedo Holdings" (targets "precast house / home / construction Kenya"); description (≤155, placeholder): "Build a precast concrete home across Kenya, faster and more affordable than stone. By Gedo Holdings, NCA registered since 2018. Get a quote today." Own OG image for shares.
+
+**Audience (lead segment TBD):** plot owners (speed + cost, "stop paying rent"), diaspora (documented build = trust antidote to remote-scam fear), investors/landlords (rental units, ROI). Likely shared page, separate ad sets per segment.
+
+**Client supplies:** precast hero + project photos; the exact campaign hook/offer (e.g. a lead-time promise or free site visit); any pricing or lead magnet.
+
+---
+
+## 13. Analytics & conversion tracking (site-wide)
+
+Running **both Meta and Google Ads** → manage all tags through **one Google Tag Manager container** rather than hardcoding each. `@next/third-parties/google` `<GoogleTagManager gtmId="GTM-XXXX" />` in the root layout; then in GTM configure a GA4 config tag (overall analytics), the Google Ads conversion tag(s), and the Meta Pixel. (Simpler code-only alternative if preferred: GA4 via `<GoogleAnalytics gaId>` + Meta Pixel via `<Script>` + Google Ads gtag — but GTM is recommended for multi-platform iteration.)
+
+**Conversion events** (push to `dataLayer`; GTM fires GA4 + Google Ads + Meta on each):
+- `generate_lead` on quote-form submit → Meta `Lead`, Google Ads "Quote submitted". Primary conversion.
+- `whatsapp_click` on any WhatsApp button → Meta `Contact`, Google Ads "WhatsApp click". Fire **before** navigation.
+- Default `page_view`.
+
+**Wiring:** `window.dataLayer.push({ event: 'generate_lead', source })` in the form success handler; an `onClick` push for WhatsApp before `window.open`. Tag every ad URL with UTMs (`utm_source=google|meta`, `utm_medium=cpc`, `utm_campaign=precast…`) — GA4/GTM capture them automatically.
+
+**Privacy:** running ad pixels in Kenya → add a short privacy-policy page and a lightweight cookie-consent notice (Data Protection Act 2019); GTM Consent Mode can gate tags. Keep it simple for now.
+
+**Later upgrades:** Meta Conversions API (server-side, better attribution than pixel-only) and Google Ads enhanced conversions — add once the basics are live.
