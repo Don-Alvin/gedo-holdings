@@ -53,6 +53,17 @@ export const metadata: Metadata = {
 };
 
 export default function PrecastPage() {
+  // Alt texts supplied by user for hero + gallery images
+  const HERO_ALT =
+    "Precast concrete panel walls erected to full room layout on a Gedo Holdings home build in rural Kenya";
+  const GALLERY_ALTS = [
+    "Precast concrete panel walls erected to full room layout on a Gedo Holdings home build in rural Kenya",
+    "Aerial view of precast wall panels and steel lintels forming a new Gedo Holdings home in Kenya",
+    "Gedo Holdings crew fixing the timber wall-plate onto precast concrete wall panels",
+    "Builders preparing the roof wall-plate on a precast concrete home by Gedo Holdings, Kenya",
+    "Timber roof trusses installed on a completed precast concrete wall shell by Gedo Holdings",
+  ];
+
   return (
     <main>
       {/* ============ HERO SECTION ============ */}
@@ -120,9 +131,21 @@ export default function PrecastPage() {
               </div>
             </div>
 
-            {/* Right column: metric cards (top wide, two below) */}
+            {/* Right column: hero background image + metric cards (top wide, two below) */}
             <div className="relative">
-              <div className="relative rounded-lg border border-ink-700 overflow-hidden p-4 bg-gradient-to-b from-ink-800 to-ink-900 flex flex-col">
+              {/* Background hero image (fill, priority, object-cover). Replace HERO_ALT above. Image lives at /public/precast/precast-01.jpg */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/precast/precast-01.jpg"
+                  alt={HERO_ALT}
+                  fill
+                  priority
+                  quality={90}
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="relative rounded-lg border border-ink-700 overflow-hidden p-4 bg-gradient-to-b from-ink-800 to-ink-900 flex flex-col z-10">
                 {/* Top wide card: more moderate height */}
                 <div className="rounded-lg p-6 bg-royal-600 text-white flex-shrink-0 h-36 md:h-44">
                   <p className="font-mono text-xs font-medium tracking-widest uppercase">{precastStats[0].eyebrow}</p>
@@ -255,30 +278,75 @@ export default function PrecastPage() {
           </div>
 
           {/* Gallery placeholder grid — designed to not look empty with few images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Main featured image */}
-            <div className="md:row-span-2 relative bg-gradient-to-b from-ink-800 to-ink-900 rounded-lg border border-ink-700 aspect-square flex items-center justify-center overflow-hidden">
-              {/* TODO: Replace with actual live build foundation/assembly photo */}
-              <div className="flex flex-col items-center gap-3 text-text-muted-inv">
-                <Building2 size={48} opacity={0.5} />
-                <p className="text-sm font-mono uppercase tracking-wide">Stage 1 photo (TODO)</p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Main large image: precast-01 (hero/main) */}
+            <div className="relative md:col-span-2 md:row-span-2 rounded-lg overflow-hidden">
+              <Image
+                src="/precast/precast-01.jpg"
+                alt={GALLERY_ALTS[0]}
+                width={0}
+                height={0}
+                sizes="(max-width: 768px) 100vw, 60vw"
+                quality={85}
+                style={{ width: "100%", height: "auto", display: "block" }}
+                className="object-cover"
+                loading="lazy"
+              />
             </div>
 
-            {/* Secondary images */}
-            <div className="relative bg-gradient-to-b from-ink-800 to-ink-900 rounded-lg border border-ink-700 aspect-video flex items-center justify-center overflow-hidden">
-              {/* TODO: Replace with stage 2 photo */}
-              <div className="flex flex-col items-center gap-3 text-text-muted-inv">
-                <Building2 size={36} opacity={0.5} />
-                <p className="text-sm font-mono uppercase tracking-wide">Stage 2 (TODO)</p>
-              </div>
+            {/* Secondary images in the right column */}
+            <div className="relative rounded-lg overflow-hidden">
+              <Image
+                src="/precast/precast-03.jpg"
+                alt={GALLERY_ALTS[1]}
+                width={0}
+                height={0}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={85}
+                style={{ width: "100%", height: "auto", display: "block" }}
+                loading="lazy"
+              />
             </div>
 
-            <div className="relative bg-gradient-to-b from-ink-800 to-ink-900 rounded-lg border border-ink-700 aspect-video flex items-center justify-center overflow-hidden">
-              {/* TODO: Replace with stage 3 photo */}
-              <div className="flex flex-col items-center gap-3 text-text-muted-inv">
-                <Building2 size={36} opacity={0.5} />
-                <p className="text-sm font-mono uppercase tracking-wide">Stage 3 (TODO)</p>
+            <div className="relative rounded-lg overflow-hidden">
+              <Image
+                src="/precast/precast-02.jpg"
+                alt={GALLERY_ALTS[2]}
+                width={0}
+                height={0}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={85}
+                style={{ width: "100%", height: "auto", display: "block" }}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Full-width row for the remaining two images */}
+            <div className="relative md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="relative rounded-lg overflow-hidden">
+                <Image
+                  src="/precast/precast-04.jpg"
+                  alt={GALLERY_ALTS[3]}
+                  width={0}
+                  height={0}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={85}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="relative rounded-lg overflow-hidden">
+                <Image
+                  src="/precast/precast-05.jpg"
+                  alt={GALLERY_ALTS[4]}
+                  width={0}
+                  height={0}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={85}
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
