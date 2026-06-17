@@ -133,10 +133,10 @@ export default function PrecastPage() {
 
             {/* Right column: hero background image + metric cards (top wide, two below) */}
             <div className="relative">
-              {/* Background hero image (fill, priority, object-cover). Replace HERO_ALT above. Image lives at /public/precast/precast-01.jpg */}
+              {/* Background hero image (fill, priority, object-cover). Replace HERO_ALT above. Image lives at /public/precast/precast-01.jpeg */}
               <div className="absolute inset-0 z-0">
                 <Image
-                  src="/precast/precast-01.jpg"
+                  src="/precast/precast-01.jpeg"
                   alt={HERO_ALT}
                   fill
                   priority
@@ -282,7 +282,7 @@ export default function PrecastPage() {
             {/* Main large image: precast-01 (hero/main) */}
             <div className="relative md:col-span-2 md:row-span-2 rounded-lg overflow-hidden">
               <Image
-                src="/precast/precast-01.jpg"
+                src="/precast/precast-01.jpeg"
                 alt={GALLERY_ALTS[0]}
                 width={0}
                 height={0}
@@ -297,7 +297,7 @@ export default function PrecastPage() {
             {/* Secondary images in the right column */}
             <div className="relative rounded-lg overflow-hidden">
               <Image
-                src="/precast/precast-03.jpg"
+                src="/precast/precast-03.jpeg"
                 alt={GALLERY_ALTS[1]}
                 width={0}
                 height={0}
@@ -310,7 +310,7 @@ export default function PrecastPage() {
 
             <div className="relative rounded-lg overflow-hidden">
               <Image
-                src="/precast/precast-02.jpg"
+                src="/precast/precast-02.jpeg"
                 alt={GALLERY_ALTS[2]}
                 width={0}
                 height={0}
@@ -325,7 +325,7 @@ export default function PrecastPage() {
             <div className="relative md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="relative rounded-lg overflow-hidden">
                 <Image
-                  src="/precast/precast-04.jpg"
+                  src="/precast/precast-04.jpeg"
                   alt={GALLERY_ALTS[3]}
                   width={0}
                   height={0}
@@ -338,7 +338,7 @@ export default function PrecastPage() {
 
               <div className="relative rounded-lg overflow-hidden">
                 <Image
-                  src="/precast/precast-05.jpg"
+                  src="/precast/precast-05.jpeg"
                   alt={GALLERY_ALTS[4]}
                   width={0}
                   height={0}
