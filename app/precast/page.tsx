@@ -18,7 +18,7 @@ export const precastStats = [
   {
     id: "cost",
     eyebrow: "COST",
-    value: "Up to 40%",
+    value: "Up to 30%",
     sub: "lower cost than stone",
     variant: "primary",
     // TODO: confirm and substantiate this percentage with client data before ads
