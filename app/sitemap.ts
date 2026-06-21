@@ -8,6 +8,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
     },
     {
+      url: `${SITE_URL}/precast`,
+      lastModified: new Date(),
+    },
+    {
       url: `${SITE_URL}/gallery`,
       lastModified: new Date(),
     },

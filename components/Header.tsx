@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MessageCircle, Menu, X, Phone } from "lucide-react";
+import { navBadges } from "@/lib/site";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/precast", label: "Precast Construction" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
@@ -57,19 +59,30 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`font-sans text-sm font-medium tracking-wide transition-colors ${
-                pathname === link.href
-                  ? "text-royal-500"
-                  : "text-text-inverse hover:text-royal-500"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const badge = navBadges[link.href];
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`font-sans text-sm font-medium tracking-wide transition-colors flex items-center gap-2 ${
+                  pathname === link.href
+                    ? "text-royal-500"
+                    : "text-text-inverse hover:text-royal-500"
+                }`}
+              >
+                {link.label}
+                {badge && (
+                  <span
+                    className="px-2 py-0.5 bg-royal-600 text-white text-xs font-mono font-medium uppercase rounded-full whitespace-nowrap"
+                    title={`${link.label} is new`}
+                  >
+                    {badge}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Desktop CTA — phone reference + WhatsApp */}
@@ -103,19 +116,30 @@ export default function Header() {
       {/* Mobile full-screen menu */}
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 top-16 bg-ink-950 z-40 flex flex-col px-6 pt-12 gap-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`font-display text-3xl font-bold py-3 border-b border-ink-700 transition-colors ${
-                pathname === link.href
-                  ? "text-royal-500"
-                  : "text-text-inverse"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const badge = navBadges[link.href];
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`font-display text-3xl font-bold py-3 border-b border-ink-700 transition-colors flex items-center gap-2 ${
+                  pathname === link.href
+                    ? "text-royal-500"
+                    : "text-text-inverse"
+                }`}
+              >
+                {link.label}
+                {badge && (
+                  <span
+                    className="px-2 py-0.5 bg-royal-600 text-white text-sm font-mono font-medium uppercase rounded-full whitespace-nowrap"
+                    title={`${link.label} is new`}
+                  >
+                    {badge}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
           <div className="mt-8 flex flex-col gap-4">
             <span className="flex items-center gap-2 text-text-muted-inv text-sm select-none">
               <Phone size={14} className="text-royal-500 flex-shrink-0" strokeWidth={1.75} />
