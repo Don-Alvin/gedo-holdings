@@ -134,7 +134,7 @@ export default function PrecastPage() {
             {/* Right column: hero background image + metric cards (top wide, two below) */}
             <div className="relative">
               {/* Background hero image (fill, priority, object-cover). Replace HERO_ALT above. Image lives at /public/precast/precast_01.jpeg */}
-              <div className="absolute inset-0 z-0">
+              {/* <div className="absolute inset-0 z-0">
                 <Image
                   src="/precast/precast_01.jpeg"
                   alt={HERO_ALT}
@@ -143,7 +143,7 @@ export default function PrecastPage() {
                   quality={90}
                   className="object-cover"
                 />
-              </div>
+              </div> */}
 
               <div className="relative rounded-lg border border-ink-700 overflow-hidden p-4 bg-gradient-to-b from-ink-800 to-ink-900 flex flex-col z-10">
                 {/* Top wide card: more moderate height */}
